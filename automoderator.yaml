@@ -1,12 +1,3 @@
----
-type: submission
-    author:
-        account_age: "< 1 days"
-    action: remove
-    action_reason: Account age too young  
-    message: "Your account seems to be too new. The post has been removed automatically. Read the subreddit's rules and search any questions you have before posting. If it does not violate any rules and your question could be answered, the post will be approved by the subreddit's moderators in a few hours. Thank you." 
-    modmail: "This post {{permalink}} was made by user /u/{{author}} who recently made their account."
-
 --- 
     type: comment
     author:
