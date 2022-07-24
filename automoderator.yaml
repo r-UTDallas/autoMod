@@ -1,0 +1,178 @@
+---
+type: submission
+    author:
+        account_age: "< 1 days"
+    action: remove
+    action_reason: Account age too young  
+    message: "Your account seems to be too new. The post has been removed automatically. Read the subreddit's rules and search any questions you have before posting. If it does not violate any rules and your question could be answered, the post will be approved by the subreddit's moderators in a few hours. Thank you." 
+    modmail: "This post {{permalink}} was made by user /u/{{author}} who recently made their account."
+
+--- 
+    type: comment
+    author:
+        account_age: "< 1 days"
+        comment_karma: "< -15"
+    action: remove
+    action_reason: Minimum requirement 
+    message: "Your post {{permalink}} was removed because your karma is too low." 
+
+--- 
+    type: comment
+    author:
+        comment_karma: "< -20"
+       
+    action: filter
+    action_reason: Karma is too negative.  
+
+---
+# Phone Number Removal
+    title+body (regex): ["\\(?(\\d{3})\\)?([ .-])(\\d{3})([ .-])(\\d{4})","(\\d{5})([ .-])(\\d{6})","\\(?(\\d{4})\\)?([ .-])(\\d{3})([ .-])(\\d{3})","\\(?(\\d{2})\\)?([ .-])(\\d{4})([ .-])(\\d{4})","\\(?(\\d{2})\\)?([ .-])(\\d{3})([ .-])(\\d{4})","\\+([\\d ]{10,15})"]
+    ~body+url (regex): "(\\[[^\\]]+?\\]\\()?(https?://|www\\.)\\S+\\)?"
+    ~body+title+url (regex): ["(800|855|866|877|888|007|911)\\W*\\d{3}\\W*\\d{4}", "\\d{3}\\W*555\\W*\\d{4}", "999-999-9999", "000-000-0000", "123-456-7890", "111-111-1111", "012-345-6789", "888-888-8888", "281\\W*330\\W*8004", "777-777-7777", "678-999-8212", "999([ .-])119([ .-])7253","0118 999 811","0118 999 881", "867( -)?5309", "505\\W*503\\W*4455", "1024 2048", "972-883-2111", "972-883-7300", "972-883-2747", "972-883-7391", "972-883-2222", "(800) 889-2443", "(972) 883-ARTS","(972) 883-2221", "(972) 883-2155", "(214) 905-3000", "(972) 883-3630", "972-883-2779", "972-744-4800", "972-883-2941","972-883-7430", "972-883-2911"]
+#972-883-2941 - Financial Aid Office
+#972-744-4800 - Richardson Police Department 
+#972-883-2779 - UTD Freight trucks
+#(972) 883-3630 - UTD Callier Center
+#972-883-2911 - UTD OIT Help Desk
+    author:
+        ~flair_text: ["University Official", "Verified Account"]
+        ~name: [utdallashousing]
+    action: filter
+    action_reason: Phone Number is Personal Information. 
+#    comment: "Sorry, but your post may contain a personal phone number." 
+---
+# A script to catch arguments
+    body+title (includes-word, regex): ['k(ill (yo)?ursel[fv](e?s)?|ys)', 'fuck (yo)?u(rsel[fv](e?s)?)?', 's(hut the fuck up|tfu)', '((s[a4]nd)?k?n[il1]gg?g?([e3][e3]?r|l[e3]t(te?)?)|sh[il1]t[- ]?sk[i1]n(n[e3]d)?|(f|ph)[a4]gg?g?([o0]t)?|[a4]ut[il1]s(t([il1]c)|m)?|ch[il1y]nc?k|[dk]h?[yil1]k[e3]|g[o0](llyw[o0]g|[o0]k)|j[e3]w|n[a4]z[il1]|r[e3]t[a4]rd([e3]d)?|qu[e3][e3][e3]?r)', '(yo)?u(''r|r| ar)e( (all|both))?( just)?( s(uch|o))?( an?)? ((?#ADJ_START)((idiot|moron)(ic)?|spastic|stupid|shit(ty)?|(mother)?fuckin[g'']?|fat|gay|dumb)([- ]?ass)?(?#ADJ_END)|(?#NOUN_START)(ass([- ]?h(ole|at))?|bell([- ]?end)?|cho(ad|de)|cu(nt|ck)|((((d|pr)i|co)ck|k?nob)([- ]?(jocke?y|((s|f)u|li)cker))?)|(mother)?fucker|bit?ch|douche|flange|idiot|moron)(?#NOUN_END)s?)', 'Get (Leukemia|AIDS|HIV|Ebola|Cancer)', 'hope you die', 'kys', 'Go (run|step|jump|play|die) in traffic', '(Kill|Hang) (yo)?urself']
+    action: filter
+    action_reason: A phrase was caught in the insult filter - [{{match}}]
+---
+#Fightin' words
+    title+body (regex): ['shut\W?the\s*fuck\W?up','fuck\W?((yo)?ursel(f|ves))','(mother)?fucking\s*(idiots?|bitche?s?|morons?|dicks?|whores?)','(yo)?u(r|''re)?\s*dumb(fuck)?','f[#u]+ck\s*is\s*wrong','you(r|''re)?\W?(a|an)?\W?(fucking)?\W?((dumb)?ass\W?(wipes?|munch|clowns?|holes?)|idiot)','insulti?n?g\W?(you|my|me|your)','(yo)?u''?r?e?\W?(fuck(ing)?)?\W?retard(ed)?','suck\W?my','cuck(ing)?','fucking?\W?weebs?','you\s+.*\s+twat','nig(s|z|ga|gas|gaz|gerz|ger|gers|lets|glets|r)?','beaner(s|z)?','spick(s|z)?','fag(got|s|z|gots|gotz)?','wetback[sz]?','gook[sz]?', 'honk(ey|ie)?', 'kike(s|z)?', 'puss(y|ies)?', 'cunt(s|z)?', 'whore(s|z)?', 'cuck(s|z)?', 'shill(s|z)?', 'nigga(s|z)?', 'shill(s|z)?', 'cuck(s|z)?', 'gay(s|z)?', 'douchebag(s|z)?', 'autis(m|t|ts|tic)?', 'retard(s|z|ed)?', 'cock(s|z)?', 'sjw(s|z)?','worst professor']
+    action: filter
+    action_reason: Fighting words - [{{match}}]
+---
+#Moderator Anti-Report Whitelist (comment)
+    type: any
+    author:
+        is_moderator: true
+    reports: 1
+    action: approve
+    action_reason: "Approving Mod Comments"
+---
+#University Official Anti-Report Whitelist (comment)
+    type: any
+    author:
+        flair_text: ["University Official", "Verified Account", "Test Account"]
+    reports: 1
+    action: approve
+    action_reason: "Approving University Official Comments"
+---
+#Flair for The Mercury News. 
+    title+body (includes, regex): ["The Mercury", "Mercury", "Mercury News"]
+    set_flair: 
+        text: The Mercury
+        template_id: ddede80e-0dbc-11ea-ad6c-0e312f326421
+---
+#Flair for Fix It Comet. 
+    title+body (includes, regex): ["Fix It"]
+    author:
+        flair_text: ["University Official", "Verified Account", "Test Account"]
+    set_flair: 
+        text: Fix It
+        template_id: ef8176a4-0dbb-11ea-932f-0e6112cbd709
+    set_sticky: true
+    action: approve
+---
+#Flair for Student Government. 
+   type: submission
+   author: ["SG_UTD"]
+   set_flair: 
+        text: Student Government
+        template_id:  ddede80e-0dbc-11ea-ad6c-0e312f326421
+---
+#Swear Words
+    type: comment
+    body (includes-word): ["cheap fuck", "fuck you", "bullshit", "nigger", "faggot", "fag", "bitchery", "fuckery"]
+    action: filter
+    action_reason: Inappropriate comments.
+---
+#Low Effort
+    type: text submission
+    body_shorter_than: 7
+    action: remove
+    action_reason: "Low Effort Post"
+    comment: Your submission was automatically removed because your post is considered low effort. Please submit a new post with both a title and a detailed body.
+---
+#Low Effort #2
+    title+body (includes, regex): [“title", "basically title","dm me"]
+    body_shorter_than: 7
+    action: remove
+    action_reason: Low Effort. - {{match}}
+    comment: Your submission was automatically removed because your post is considered low effort. Please submit a new post with both a title and a detailed body.
+---
+#Waitlist Posts
+    title (includes, regex): [“waitlist", "chance waitlist", "waitlist chance", "waitlist question", "class waitlist"]
+    action: filter
+    action_reason: Waitlist Posts
+    comment: Your post is currently under review. If you have a waitlist question, please search the subreddit. If your post is new and have not been answered in previous posts, our moderators will approve the post in a few hours. Regarding questions on the chances of you being enrolled in a course while you are # on the waitlist, no one knows the answer to that. If someone drops their enrollment, then the first person on the waitlist gets put in the class. Please do not make any more waitlist chance posts. Thank you. 
+--- 
+#Scam Prevention Automod Comment Response
+    title+body (includes, regex): ["scam", "phishing"]
+    type: submission
+#    action: filter
+#    action_reason: Scam Prevention
+    comment: "This message is just automatic to help prevent scams. If you received any scam emails or potential scam emails, please forward the email to infosecurity@utdallas.edu . Help prevent phishing emails from scamming our community. Thank you."
+---
+#Harmful and damaging posts/ false allegations 
+    title+body (includes, regex): ["rape", "sexual harassment", "sexual assault"]
+    action: filter
+    action_reason: Potential False Allegation - [{{match}}]
+    #comment: "This message is automatic. Due to past false allegations and harmful statements, your post is currently filtered and need approval from the subreddit's moderating team. Please message the moderating team if you have any evidence (not personal anecdotes) regarding the topic. Thank you."
+
+---
+# Post is about Roommate/Sublease
+    title (includes, regex): ["looking roommate", "sublease", "subleasing", "relet","reletting", "sublet","subletting", "need roommate", "apartment available", "Looking for Roommate", "available room", "at Northside from", "Looking for a place", "looking for a roommate", "Northside Room Available", "Northside room(s) available","Room Available", "Potential Roommate", "Looking for Potential Roommate", "Looking to sublease", "looking for housing"]
+    action: filter
+    action_reason: Roommate/subleasing posts should be put in the megathread.
+    comment: "If you are subleasing, looking for a roommate, or looking for a place to stay please look in this megathread [here](https://www.reddit.com/r/utdallas/comments/kia9tb/spring_2021_housemateroommatesubleasing_megathread)."
+
+#ALEKS Exam
+    title (includes, regex): ["ALEK", "ALEKS","ALEKS EXAM"]
+    action: remove
+    action_reason: ALEKS Exam
+    comment: "This message is automatic. Any questions regarding ALEKS exam, please search the subreddit by the ALEKS post flair: https://www.reddit.com/r/utdallas/?f=flair_name%3A%22ALEKS%22 . If your question have not been answered, our moderators will approve your post. Your post won't be approved if your post's title is simply AlEKS Exam. Please give a more detailed title. Example: ALEKS Exam: Next Step if Low Score, Late Graduation?"
+---
+
+#Academic Dishonesty Filter
+    type: any
+    domain+url+title+body (includes, regex): ['coursehero.com', 'chegg.com', 'chegg', 'coursehero']
+    action: remove
+    action_reason: This contains a chegg/coursehero link.
+    comment: "Academic dishonesty is prohibited on this subreddit and in UTD. Violation of Rule #9."
+---
+#Copypastas 
+    title (includes, regex): ["two guys looking", "two girls looking", "2 guys looking", "2 girls looking"]
+    action: filter
+    action_reason: No Copypastas
+---
+
+#New User- restore when trolls appear
+#type: any  
+#author:
+    #account_age: "< 12 hours"
+    #combined_karma: "< 10"
+    #satisfy_any_threshold: true
+#action: filter
+#~author: [utdallashousing, libertyforhk420]
+#action_reason: new account filter
+
+---
+    type: comment
+    body: "!sticky"
+    is_top_level: true
+    author:
+        flair_css_class: "sticky"
+    parent_submission:
+        set_sticky: true
+    action: remove
+    comment: "It is done."
